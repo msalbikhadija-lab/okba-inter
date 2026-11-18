@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Archives
+*.zip
+*.tar.gz
+
+# Database & Backups
+backend/database/*.db
+!backend/database/app.db
+backend/database/*.db-journal
+backend/database/*.bak
+*.bak
+*.log
+
+# Logs
+backend/database/audit.log
+*.log
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# IDE & OS
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Node (if added later)
+node_modules/
+dist/
+build/
+
+.vercel

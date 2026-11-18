@@ -1,0 +1,21 @@
+[Unit]
+Description=OKBA Inter ERP - Gunicorn Service
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/okba/backend
+Environment="PATH=/var/www/okba/backend/.venv/bin:/usr/local/bin:/usr/bin"
+Environment="APP_ENV=production"
+Environment="SECRET_KEY=cle_secrete_a_remplacer"
+Environment="DATABASE_URL=sqlite:////var/www/okba/backend/database/app.db"
+Environment="CORS_ORIGINS=http://okba.darna.tn,https://okba.darna.tn"
+
+ExecStart=/var/www/okba/backend/.venv/bin/gunicorn --workers 3 --bind 127.0.0.1:5100 --access-logfile /var/log/okba-access.log --error-logfile /var/log/okba-error.log wsgi:application
+
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

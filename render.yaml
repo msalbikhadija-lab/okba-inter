@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: okba-inter
+    env: python
+    buildCommand: "pip install -r backend/requirements.txt"
+    startCommand: "gunicorn --chdir backend wsgi:application"
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: SECRET_KEY
+        generateValue: true
+      - key: CORS_ORIGINS
+        value: "https://okba-inter.pages.dev,http://localhost:5100,http://127.0.0.1:5100"
+      - key: PYTHON_VERSION
+        value: 3.11.9
