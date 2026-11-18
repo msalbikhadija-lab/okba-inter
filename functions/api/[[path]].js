@@ -1,9 +1,13 @@
 export async function onRequest(context) {
   const url = new URL(context.request.url);
-  const targetUrl = 'https://okba2new-migre.vercel.app' + url.pathname + url.search;
+  const targetHost = 'okba2new-migre.vercel.app';
+  const targetUrl = 'https://' + targetHost + url.pathname + url.search;
   
   const headers = new Headers(context.request.headers);
-  headers.set('Host', 'okba2new-migre.vercel.app');
+  headers.set('Host', targetHost);
+  if (headers.has('Origin')) {
+    headers.set('Origin', 'https://' + targetHost);
+  }
 
   const modifiedRequest = new Request(targetUrl, {
     method: context.request.method,
