@@ -1,3 +1,2 @@
 # Cloudflare Pages Redirects / Proxy
-# Proxifie tous les appels /api/* vers votre backend Render
-/api/*  https://okba-inter.onrender.com/api/:splat  200
+/api/*  https://okba2new-migre.vercel.app/api/:splat  200
