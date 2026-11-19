@@ -1,0 +1,9 @@
+<resources>
+    <style name="Theme.OKBAInter" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">#2563eb</item>
+        <item name="colorPrimaryVariant">#1d4ed8</item>
+        <item name="colorOnPrimary">#ffffff</item>
+        <item name="android:statusBarColor">#1e293b</item>
+        <item name="android:navigationBarColor">#0f172a</item>
+    </style>
+</resources>
