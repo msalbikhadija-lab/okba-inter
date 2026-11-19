@@ -452,7 +452,7 @@ const [search, setSearch] = useState('');
             style: {
               marginTop: '24px',
               paddingTop: '16px',
-              borderTop: '1px solid #334155',
+              borderTop: '1px solid #e2e8f0',
               textAlign: 'center',
             },
           },
@@ -470,27 +470,35 @@ const [search, setSearch] = useState('');
                 width: '100%',
                 textDecoration: 'none',
                 boxSizing: 'border-box',
-                padding: '10px 16px',
+                padding: '11px 16px',
                 fontSize: '14px',
+                fontWeight: '600',
               },
             },
             '📲 Télécharger l\'application Android (APK)'
           ),
           e(
-            'p',
+            'div',
             {
               style: {
-                marginTop: '12px',
+                marginTop: '14px',
+                padding: '10px 12px',
+                background: '#f8fafc',
+                border: '1px solid #e2e8f0',
+                borderRadius: '8px',
                 fontSize: '12px',
-                color: '#94a3b8',
-                lineHeight: '1.4',
+                color: '#334155',
+                lineHeight: '1.5',
+                textAlign: 'left',
               },
             },
-            '🍏 Sur iPhone : dans Safari, appuyez sur ',
-            e('strong', { style: { color: '#f8fafc' } }, 'Partager ⎋'),
+            '🍏 ',
+            e('strong', { style: { color: '#0f172a' } }, 'Sur iPhone : '),
+            'dans Safari, appuyez sur ',
+            e('strong', { style: { color: '#2563eb' } }, 'Partager ⎋'),
             ' puis sur ',
-            e('strong', { style: { color: '#f8fafc' } }, '« Sur l\'écran d\'accueil »'),
-            ' pour l\'installer comme une application native.'
+            e('strong', { style: { color: '#0f172a' } }, '« Sur l\'écran d\'accueil »'),
+            ' pour l\'installer comme une application.'
           )
         )
       )
