@@ -475,6 +475,22 @@ const [search, setSearch] = useState('');
               },
             },
             '📲 Télécharger l\'application Android (APK)'
+          ),
+          e(
+            'p',
+            {
+              style: {
+                marginTop: '12px',
+                fontSize: '12px',
+                color: '#94a3b8',
+                lineHeight: '1.4',
+              },
+            },
+            '🍏 Sur iPhone : dans Safari, appuyez sur ',
+            e('strong', { style: { color: '#f8fafc' } }, 'Partager ⎋'),
+            ' puis sur ',
+            e('strong', { style: { color: '#f8fafc' } }, '« Sur l\'écran d\'accueil »'),
+            ' pour l\'installer comme une application native.'
           )
         )
       )
