@@ -445,7 +445,38 @@ const [search, setSearch] = useState('');
             loading ? 'Connexion...' : 'Se connecter'
           )
         ),
-        error ? e('p', { className: 'notice error', role: 'alert' }, error) : null
+        error ? e('p', { className: 'notice error', role: 'alert' }, error) : null,
+        e(
+          'div',
+          {
+            style: {
+              marginTop: '24px',
+              paddingTop: '16px',
+              borderTop: '1px solid #334155',
+              textAlign: 'center',
+            },
+          },
+          e(
+            'a',
+            {
+              href: './OKBA-Inter.apk',
+              download: 'OKBA-Inter.apk',
+              className: 'button secondary',
+              style: {
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                width: '100%',
+                textDecoration: 'none',
+                boxSizing: 'border-box',
+                padding: '10px 16px',
+                fontSize: '14px',
+              },
+            },
+            '📲 Télécharger l\'application Android (APK)'
+          )
+        )
       )
     );
   }
