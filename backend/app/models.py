@@ -248,7 +248,7 @@ class FairAssignment(db.Model):
             "id": self.id,
             "fair_id": self.fair_id,
             "fair_name": self.fair.nom if self.fair else "",
-            "register_code": self.register_code or "",
+            "register_code": getattr(self, "register_code", "") or "",
             "user_id": self.user_id,
             "user_name": (
                 f"{self.user.prenom} {self.user.nom}".strip() if self.user else ""
