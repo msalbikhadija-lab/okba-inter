@@ -1830,6 +1830,8 @@ function ArticlesPage({ user, onBack, onClients, onStock, onLogout }) {
   const canManage = hasViewPermission(user, 'article');
   const [articles, setArticles] = useState([]);
   const [search, setSearch] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  useEffect(() => { setCurrentPage(1); }, [search]);
   const [form, setForm] = useState(EMPTY_ARTICLE);
   const [editingRef, setEditingRef] = useState(null);
   const [loading, setLoading] = useState(true);

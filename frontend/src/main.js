@@ -1,4 +1,4 @@
-import App from './App.js?v=2.7';
+import App from './App.js?v=2.8';
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
