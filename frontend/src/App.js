@@ -1,4 +1,4 @@
-﻿const { useEffect, useState } = React;
+﻿const { useEffect, useState, useRef, useMemo, useCallback } = React;
 const e = React.createElement;
 
 const configuredApiUrl =
@@ -2054,6 +2054,20 @@ function ArticlesPage({ user, onBack, onClients, onStock, onLogout }) {
                           ? e(
                               'td',
                               { className: 'actions-cell' },
+                              e(
+                                'button',
+                                {
+                                  className: 'text-button',
+                                  title: 'Afficher le code-barres',
+                                  onClick: () =>
+                                    setBarcodeModalItem({
+                                      code_barre: article.ref,
+                                      nom: article.nom,
+                                      prix_vente: article.prix_vente || 0,
+                                    }),
+                                },
+                                '🏷️'
+                              ),
                               e('button', { className: 'text-button', onClick: () => startEdit(article) }, 'Modifier'),
                               e('button', { className: 'text-button danger-text', onClick: () => deleteArticle(article) }, 'Supprimer')
                             )
@@ -2067,12 +2081,12 @@ function ArticlesPage({ user, onBack, onClients, onStock, onLogout }) {
                         'td',
                         { className: 'empty-state', colSpan: canManage ? 7 : 6 },
                         loading ? 'Chargement des articles...' : 'Aucun article trouvé.'
-                      ),
-          e(Pagination, { page: currentPage, pages: totalPages, total: filteredArticles.length, onPageChange: setCurrentPage })
+                      )
                     )
               )
             )
-          )
+          ),
+          e(Pagination, { page: currentPage, pages: totalPages, total: filteredArticles.length, onPageChange: setCurrentPage })
         ),
         canManage
           ? e(
@@ -2192,7 +2206,13 @@ function ArticlesPage({ user, onBack, onClients, onStock, onLogout }) {
               )
             )
           : null
-      )
+      ),
+      barcodeModalItem
+        ? e(BarcodeModal, {
+            item: barcodeModalItem,
+            onClose: () => setBarcodeModalItem(null),
+          })
+        : null
     )
   );
 }
@@ -4363,6 +4383,8 @@ function StockPage({ user, onBack, onArticles, onSuppliers, onLogout }) {
   });
   const [editingId, setEditingId] = useState(null);
   const [search, setSearch] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  useEffect(() => { setCurrentPage(1); }, [search]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState('');
@@ -4468,6 +4490,9 @@ function StockPage({ user, onBack, onArticles, onSuppliers, onLogout }) {
       .toLowerCase()
       .includes(search.toLowerCase())
   );
+  const pageSize = 15;
+  const totalPages = Math.max(1, Math.ceil(filteredMovements.length / pageSize));
+  const paginatedMovements = filteredMovements.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
   return e(
     'main',
@@ -4555,8 +4580,8 @@ function StockPage({ user, onBack, onArticles, onSuppliers, onLogout }) {
               e(
                 'tbody',
                 null,
-                filteredMovements.length
-                  ? filteredMovements.map((movement) =>
+                paginatedMovements.length
+                  ? paginatedMovements.map((movement) =>
                       e(
                         'tr',
                         { key: movement.id },
@@ -4578,7 +4603,8 @@ function StockPage({ user, onBack, onArticles, onSuppliers, onLogout }) {
                   : e('tr', null, e('td', { className: 'empty-state', colSpan: canManageStock ? 6 : 5 }, loading ? 'Chargement des mouvements...' : 'Aucun mouvement enregistré.'))
               )
             )
-          )
+          ),
+          e(Pagination, { page: currentPage, pages: totalPages, total: filteredMovements.length, onPageChange: setCurrentPage })
         ),
         e(
           'section',
